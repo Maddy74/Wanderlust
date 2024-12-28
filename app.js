@@ -62,9 +62,9 @@ const sessionOption = {
         maxAge: 7*24*60*60*1000, //days*hour*min*sec*milliseconds
         httpOnly: true, //for cross scripting attacks
     } };
+
     // app.get("/", (req,res) => {
-    //     res.send("Hi I am root");
-    //     // res.render("home.ejs");
+    //      res.redirect("/listings");
     // });
 
     app.use(session(sessionOption));
@@ -84,6 +84,7 @@ app.use((req,res,next) => {
     next();
 });
 
+app.use("/", listingRouter)
 app.use("/listings", listingRouter);
 app.use("/listings/:id/reviews", reviewRouter);
 app.use("/", userRouter);
